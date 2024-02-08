@@ -1,4 +1,8 @@
-namespace Bids.Entities;
+using Bids.Core.Entities.Bids;
+using Bids.Core.Entities.Users;
+using Bids.Entities;
+
+namespace Bids.Core.Entities.Auctions;
 
 public class Auction
 {
@@ -12,6 +16,6 @@ public class Auction
     public DateTime UpdatedOn { get; set; } = DateTime.MinValue;
     public DateTime DeletedOn { get; set; } = DateTime.MinValue;
     public bool Deleted { get; set; } = false;
-    
-    public IEnumerable<Bid> Bids { get; set; } = Enumerable.Empty<Bid>();
+
+    public ICollection<Bid> Bids { get; set; } = null!;
 }

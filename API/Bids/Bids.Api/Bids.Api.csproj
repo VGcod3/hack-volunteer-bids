@@ -4,13 +4,17 @@
         <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.15" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.15" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.13" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.15" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.15">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.15">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -20,10 +24,17 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Bids.Core.Entities\Bids.Core.Entities.csproj" />
+      <ProjectReference Include="..\Bids.Core\Bids.Core.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <Compile Remove="Controllers\WeatherForecastController.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
     </ItemGroup>
 
 </Project>

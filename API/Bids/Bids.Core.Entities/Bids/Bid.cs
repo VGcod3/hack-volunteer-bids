@@ -1,4 +1,8 @@
-namespace Bids.Entities;
+using Bids.Core.Entities.Auctions;
+using Bids.Core.Entities.Users;
+using Bids.Entities;
+
+namespace Bids.Core.Entities.Bids;
 
 public class Bid
 {

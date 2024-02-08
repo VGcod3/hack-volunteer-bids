@@ -1,6 +1,7 @@
+using Bids.Core.Entities.Bids;
 using Microsoft.AspNetCore.Identity;
 
-namespace Bids.Entities;
+namespace Bids.Core.Entities.Users;
 
 public class User : IdentityUser
 {
