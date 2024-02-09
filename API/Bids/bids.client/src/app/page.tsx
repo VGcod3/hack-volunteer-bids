@@ -1,19 +1,15 @@
-'use client';
-import { useState } from 'react';
+import FeaturesBlock from '@/components/FeaturesBlock';
+import MainSection from '@/components/MainSection';
+import Promo from '@/components/PromoBLock';
 
-export default function Home() {
-  const [auctions, setAuctions] = useState<{ hello: string | undefined }>();
-
-  const getUsers = async () => {
-    const response = await fetch('api/auctions/45', { method: 'get' });
-    const resposeJosn = await response.json();
-
-    setAuctions(resposeJosn);
-  };
+const HomePage = () => {
   return (
-    <main>
-      <button onClick={getUsers}> Get some staff</button>
-      <ul> {auctions?.hello}</ul>
-    </main>
+    <>
+      <Promo />
+      <FeaturesBlock />
+      <MainSection />
+    </>
   );
-}
+};
+
+export default HomePage;

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Login | INT20H Bids',
+  title: 'Register | INT20H Bids',
   description: 'INT20H Bids project by F0rGotten;',
 };
 
