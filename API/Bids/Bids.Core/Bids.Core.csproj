@@ -12,11 +12,18 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Bids.Common.Abstrations\Bids.Common.Abstrations.csproj" />
       <ProjectReference Include="..\Bids.Core.Entities\Bids.Core.Entities.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <Compile Remove="Class1.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Microsoft.AspNetCore.Identity">
+        <HintPath>..\..\..\..\..\..\..\..\..\Program Files\dotnet\shared\Microsoft.AspNetCore.App\7.0.14\Microsoft.AspNetCore.Identity.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>

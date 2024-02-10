@@ -1,4 +1,4 @@
-using Bids.Entities;
+using Bids.Core.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bids.Core;

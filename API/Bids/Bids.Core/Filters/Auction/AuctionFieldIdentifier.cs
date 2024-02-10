@@ -1,4 +1,4 @@
-namespace Bids.Entities;
+namespace Bids.Core.Filters.Auction;
 
 public enum AuctionFieldIdentifier
 {

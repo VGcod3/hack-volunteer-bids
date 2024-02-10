@@ -1,3 +1,5 @@
+using Bids.Core.Entities.Users;
+
 namespace Bids.Entities;
 
 public class Bid

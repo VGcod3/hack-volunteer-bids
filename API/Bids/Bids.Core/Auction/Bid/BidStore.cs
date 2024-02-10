@@ -1,4 +1,6 @@
 using Bids.Abstrations;
+using Bids.Core.Filters;
+using Bids.Core.Filters.Bid;
 using Bids.Entities;
 using Microsoft.EntityFrameworkCore;
 

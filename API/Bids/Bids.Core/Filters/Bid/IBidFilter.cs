@@ -1,6 +1,6 @@
 using Bids.Abstrations;
 
-namespace Bids.Entities;
+namespace Bids.Core.Filters.Bid;
 
 public interface IBidFilter : IPagination
 {

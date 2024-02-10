@@ -1,4 +1,7 @@
 using Bids.Abstrations;
+using Bids.Core.Filters;
+using Bids.Core.Filters.Auction;
+using Bids.Core.Filters.Bid;
 using Bids.Entities;
 
 namespace Bids.Core;
