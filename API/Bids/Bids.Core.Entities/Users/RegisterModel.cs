@@ -1,4 +1,4 @@
-namespace Bids.Entities;
+namespace Bids.Core.Entities.Users;
 
 public class RegisterModel
 {
