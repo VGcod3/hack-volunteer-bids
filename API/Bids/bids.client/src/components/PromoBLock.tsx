@@ -61,10 +61,7 @@ export default function Example() {
                   </AnimatedWrapper>
                   <div className='mt-6'>
                     <AnimatedWrapper from='left' delay={0.3} toggleMultiple>
-                      <Link
-                        href='/rooms'
-                        // className="inline-block rounded-md border border-transparent bg-indigo-600 py-3 px-8 font-medium text-white hover:bg-indigo-700"
-                      >
+                      <Link href='/auctions'>
                         <Button>Browse auctions</Button>
                       </Link>
                     </AnimatedWrapper>

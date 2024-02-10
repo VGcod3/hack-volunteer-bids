@@ -1,7 +1,7 @@
 'use client';
 import AnimatedWrapper from '@/components/AnimatedWrapper';
 import Link from 'next/link';
-import RoomsCardGrid from './RoomCardsGrid';
+import LotCardsGrid from './LotCardsGrid';
 
 const MainSection = () => {
   return (
@@ -11,7 +11,7 @@ const MainSection = () => {
           <AnimatedWrapper>
             <h3 className='text-3xl font-bold text-neutral- text-center mb-6'>Hot Lots!</h3>
           </AnimatedWrapper>
-          <RoomsCardGrid />
+          <LotCardsGrid />
 
           <div className='text-center mt-8'>
             <AnimatedWrapper>

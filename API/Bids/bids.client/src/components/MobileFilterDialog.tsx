@@ -21,7 +21,7 @@ export function MobileFilterDialog() {
           <FilterIcon className='h-5 w-5' aria-hidden='true' />
         </Button>
       </DialogTrigger>
-      <DialogContent className='sm:max-w-[425px]'>
+      <DialogContent className='sm:max-w-lg mx-auto w-full'>
         <DialogHeader>
           <DialogTitle>Filter</DialogTitle>
           <DialogDescription>Apply filters to narrow down your search results</DialogDescription>

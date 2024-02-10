@@ -1,5 +1,6 @@
+import { Button } from '@/components/ui/button';
+import { lotsdata } from '@/store/lotsData';
 import Link from 'next/link';
-import rooms from '../../rooms';
 
 export default function GoodsLIst() {
   return (
@@ -9,17 +10,22 @@ export default function GoodsLIst() {
           <th
             scope='col'
             className='py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-neutral-900 sm:pl-6'>
-            Title
+            Lot name
           </th>
           <th
             scope='col'
             className='hidden px-3 py-3.5 text-left text-sm font-semibold text-neutral-900 sm:table-cell'>
-            Price
+            Start price
           </th>
           <th
             scope='col'
             className='hidden px-3 py-3.5 text-left text-sm font-semibold text-neutral-900 sm:table-cell'>
-            Visistors
+            Highest bid
+          </th>
+          <th
+            scope='col'
+            className='hidden px-3 py-3.5 text-left text-sm font-semibold text-neutral-900 sm:table-cell'>
+            Auction ends
           </th>
           <th
             scope='col'
@@ -27,41 +33,27 @@ export default function GoodsLIst() {
         </tr>
       </thead>
       <tbody className='divide-y divide-neutral-200 bg-white'>
-        {rooms.map((room, index) => (
+        {lotsdata.map((lot, index) => (
           <tr key={index}>
-            <td className='py-4 pl-4 pr-3 text-sm font-normal text-neutral-900 sm:hidden none sm:pl-6'>
-              <dl>
-                <dd className='mt-1 truncate text-neutral-700 font-bold'>{room.title}</dd>
-              </dl>
-              <dl>
-                <dd className='mt-1 truncate text-neutral-700'>{room.capacity}</dd>
-              </dl>
-              <dl>
-                <dd className='mt-1  text-neutral-700'>
-                  <span className='bg-neutral-200 rounded text-indigo-600 px-2 py-1 font-light'>
-                    {`$${(index + 1) * 23}`}
-                  </span>
-                </dd>
-              </dl>
-            </td>
-
-            <td className='px-3 py-4 text-sm text-neutral-500 hidden sm:table-cell'>
-              {room.title}
-            </td>
-            <td className='px-3 py-4 text-sm hidden sm:table-cell'>
-              <span className='bg-neutral-200 rounded  text-indigo-600 px-2 py-1 font-light'>
-                {`$${(index + 1) * 23}`}
-              </span>
-            </td>
-            <td className='px-3 py-4 text-sm text-neutral-500 hidden sm:table-cell'>
-              {room.capacity}
-            </td>
-            <td className='text-center text-sm font-medium'>
-              <Link
-                href={`/room/${index}`}
-                className='min-w-8 text-white rounded-md hover:shadow-md transition-all hover:scale-125 hover:shadow-indigo-300 bg-indigo-600 px-3 py-2 focus:ring-indigo-600active:shadow-indigo-600 focus:outline-offset-4'>
-                Make a bid
+            <td className='pl-4 pr-3 py-3.5 sm:pl-6'>
+              <Link href={`/auctions/${index}`} className='text-neutral-700 hover:underline'>
+                {lot.name}
               </Link>
+            </td>
+            <td className='hidden px-3 py-3.5 sm:table-cell text-neutral-600'>{lot.startPrice}</td>
+            <td className='hidden px-3 py-3.5 sm:table-cell text-indigo-400'>{lot.highestPrice}</td>
+            <td className='hidden px-3 py-3.5 sm:table-cell'>
+              {new Date(lot.auctionEnd).toLocaleString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+              })}
+            </td>
+            <td className='px-3 py-3.5'>
+              <Button className='py-2'>
+                <Link href={`/auctions/${index}`}>View lot</Link>
+              </Button>
             </td>
           </tr>
         ))}

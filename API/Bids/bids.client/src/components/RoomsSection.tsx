@@ -7,7 +7,7 @@ import SortingButtons from '@/components/SortingButtons';
 import GoodsGrid from '@/components/GoodsGrid';
 import GoodsList from '@/components/GoodsList';
 import CollapsibleFilters from './CollapsibleFilters';
-import Search from './ui/Search';
+import Search from './Search';
 
 import { PaginationElement } from './PaginationElement';
 

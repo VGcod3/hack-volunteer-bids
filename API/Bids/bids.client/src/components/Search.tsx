@@ -1,8 +1,8 @@
 'use client';
 import { Search } from 'lucide-react';
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
-import { Button } from './button';
-import { Input } from './input';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
 
 // Custom debounce function
 const useDebounce = (callback: Function, delay: number) => {

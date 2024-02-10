@@ -1,10 +1,11 @@
 import { ReactNode } from 'react';
 
-import { useState } from 'react';
-import { Button } from './button';
-import { Input } from './input';
-
 import { Eye, EyeOff } from 'lucide-react';
+import { useState } from 'react';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+
+import { ErrorMessage, Field, FieldProps } from 'formik';
 
 interface InputFieldProps {
   name: string;
@@ -33,26 +34,33 @@ export default function InputField({
 
   return (
     <div className='grid gap-2'>
-      <label htmlFor={name} className='mt-0 block text-sm font-medium text-neutral-700'>
+      <label htmlFor={name} className={'mt-0 block text-sm font-medium text-neutral-700'}>
         {label}
       </label>
       <div className='relative rounded-md shadow-sm'>
         <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
           {children}
         </div>
-        <Input
-          id={name}
-          name={name}
-          type={type === 'password' && showPassword ? 'text' : type}
-          placeholder={placeholder}
-          defaultValue={defaultValue}
-          className={[
-            children && `pl-10`,
-            `block w-full border-neutral-300 rounded-md shadow-sm sm:text-sm ${className}`,
-          ].join(' ')}
-        />
+
+        <Field name={name}>
+          {({ field }: FieldProps) => (
+            <Input
+              {...field}
+              id={name}
+              type={type === 'password' && showPassword ? 'text' : type}
+              placeholder={placeholder}
+              defaultValue={defaultValue}
+              className={[
+                children && `pl-10`,
+                `block w-full border-neutral-300 rounded-md shadow-sm sm:text-sm ${className}`,
+              ].join(' ')}
+            />
+          )}
+        </Field>
+
         {type === 'password' && (
           <Button
+            type='button'
             variant={'ghost'}
             className='focus:ring-indigo-600 absolute rounded-l-none inset-y-0 right-0 pr-3 flex items-center cursor-pointer '
             onClick={toggleShowPassword}>
@@ -64,7 +72,7 @@ export default function InputField({
           </Button>
         )}
       </div>
-      {/* {errors[name] && <p className='mb-t text-sm text-red-600'>{errors[name].message}</p>} */}
+      <ErrorMessage name={name} component='p' className='mb-t text-sm text-rose-600' />
     </div>
   );
 }

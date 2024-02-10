@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import filterReducer from './filterSlice';
+import lotSlice from './lotSlice';
 
 const rootReducer = combineReducers({
   filter: filterReducer,
+  lot: lotSlice,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
