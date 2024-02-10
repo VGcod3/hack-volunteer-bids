@@ -1,6 +1,11 @@
+using System.Text;
 using Bids.Api.Common.Utils;
 using Bids.Core;
+using Bids.Entities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +21,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(
         builder.Configuration.GetConnectionString("Default")));
 builder.Services.AddCors(options =>
     options.AddPolicy("CorsPolicy", b => { b.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); }));
+
+builder.Services.AddCore();
+
+builder.Services.AddIdentity<User, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
 
 var app = builder.Build();
 

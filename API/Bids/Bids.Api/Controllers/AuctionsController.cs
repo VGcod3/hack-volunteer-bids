@@ -1,5 +1,3 @@
-using Bids.Core.Entities.Auctions;
-using Bids.Core.Entities.Bids;
 using Bids.Entities;
 using Microsoft.AspNetCore.Mvc;
 

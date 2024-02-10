@@ -1,8 +1,4 @@
-using Bids.Core.Entities.Bids;
-using Bids.Core.Entities.Users;
-using Bids.Entities;
-
-namespace Bids.Core.Entities.Auctions;
+namespace Bids.Entities;
 
 public class Auction
 {
@@ -10,6 +6,8 @@ public class Auction
     public string Name { get; set; } = String.Empty;
     public string Description { get; set; } = String.Empty;
     public double StartPrice { get; set; }
+    public DateTime StartDate { get; set; }
+    public DateTime FinishDate { get; set; }
     public User CreatedBy { get; set; } = null!;
     public bool Completed { get; set; } = false;
     public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
