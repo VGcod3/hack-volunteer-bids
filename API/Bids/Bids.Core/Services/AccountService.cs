@@ -26,7 +26,7 @@ public class AccountService : IAccountService
 
     public async Task<IdentityResult?> RegisterAsync(RegisterModel registerModel)
     {
-        var user = new User()
+        var user = new User
         {
             Email = registerModel.Email,
             UserName = registerModel.FirstName,
@@ -61,7 +61,7 @@ public class AccountService : IAccountService
         authClaims
             .AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
-        var token = CreateToken(authClaims);
+        var token = CreateToken(authClaims, loginModel);
         var refreshToken = GenerateRefreshToken();
 
         _ = int.TryParse(_configuration["JWT:RefreshTokenValidityInDays"], out int refreshTokenValidityInDays);
@@ -78,16 +78,24 @@ public class AccountService : IAccountService
         };
     }
     
-    private string CreateToken(IEnumerable<Claim> authClaims)
+    private string CreateToken(IEnumerable<Claim> authClaims, LoginModel? loginModel)
     {
         var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
-        _ = int.TryParse(_configuration["JWT:TokenValidityInMinutes"], out var tokenValidityInMinutes);
+        _ = int.TryParse(_configuration["JWT:TokenValidityInMinutes"], out int tokenValidityInMinutes);
 
+        DateTime expires = DateTime.Now.AddMinutes(tokenValidityInMinutes);
+        
+        //TODO: delete this after testing
+        if (loginModel?.AccessTokenInSeconds is {} seconds)
+        {
+            expires = DateTime.Now.AddSeconds(seconds);
+        }
+        
         var token = new JwtSecurityToken(
             issuer: _configuration["JWT:ValidIssuer"],
             audience: _configuration["JWT:ValidAudience"],
             claims: authClaims,
-            expires: DateTime.Now.AddMinutes(tokenValidityInMinutes),
+            expires: expires,
             signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
         );
 
@@ -114,7 +122,7 @@ public class AccountService : IAccountService
 
         if (user is null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now) { return null; }
 
-        var newAccessToken = CreateToken(principal.Claims.ToList());
+        var newAccessToken = CreateToken(principal.Claims.ToList(),null);
         var newRefreshToken = GenerateRefreshToken();
 
         user.RefreshToken = newRefreshToken;

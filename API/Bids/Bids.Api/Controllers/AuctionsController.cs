@@ -1,4 +1,6 @@
+using Bids.Core;
 using Bids.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bids.Api.Controllers;
@@ -20,18 +22,21 @@ public class AuctionsController : Controller
     }
     
     [HttpPost]
+    [Authorize]
     public IActionResult Create([FromBody] Auction auction)
     {
         return Ok();
     }
     
     [HttpDelete("{auctionId:long}")]
+    [Authorize]
     public IActionResult Delete([FromRoute] long auctionId)
     {
         return Ok();
     }
     
     [HttpPut("{auctionId:long}")]
+    [Authorize]
     public IActionResult Update([FromRoute] long auctionId, [FromBody] Auction auction)
     {
         return Ok();

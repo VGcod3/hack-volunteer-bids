@@ -42,7 +42,7 @@ public class AuthenticationController : ControllerBase
             : BadRequest(result!.Errors);
     }
     
-    
+    [Authorize]
     [HttpPost("logout")]
     [Authorize]
     public async Task<IActionResult> Logout()
@@ -51,6 +51,7 @@ public class AuthenticationController : ControllerBase
         return NoContent();
     }
     
+    [Authorize]
     [HttpPost]
     [Route("refreshToken")]
     public async Task<IActionResult> RefreshToken(TokenModel? tokenModel)

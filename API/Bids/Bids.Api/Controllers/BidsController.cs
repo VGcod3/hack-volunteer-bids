@@ -1,4 +1,5 @@
 using Bids.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,19 +22,21 @@ public class BidsController : ControllerBase
         return Ok();
     }
     
+    [Authorize]
     [HttpDelete("{bidId:long}")]
     public IActionResult Delete([FromRoute] long auctionId, [FromRoute] long bidId)
     {
         return Ok();
     }
     
+    [Authorize]
     [HttpPost]
     public IActionResult Create(long auctionId, [FromBody] Bid auction)
     {
         return Ok();
     }
     
-    
+    [Authorize]
     [HttpPut]
     public IActionResult Update([FromRoute] long auctionId, [FromBody] Auction auction)
     {
