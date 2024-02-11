@@ -36,6 +36,12 @@ public class UserStore
             .FirstOrDefaultAsync(u => u.Id == userId);
     }
     
+    public Task<User?> GetByEmail(string email)
+    {
+        return _storage.Users
+            .FirstOrDefaultAsync(u => u.Email == email);
+    }
+    
     public Task Update(User user)
     {
         _storage.Users.Update(user);

@@ -15,7 +15,7 @@ public class AuctionStore
         _storage = dbContext;
     }
 
-    public Task<int> CountTotal(IAuctionFilter filter)
+    public Task<int> CountTotal(AuctionFilter filter)
     {
         return _storage.Auctions
             .FilterBy(filter)
@@ -42,12 +42,12 @@ public class AuctionStore
         }
     }
     
-    public Task<List<Auction>> Find(IAuctionFilter filter)
+    public Task<List<Auction>> Find(AuctionFilter filter)
     {
         return _storage.Auctions
             .FilterBy(filter)
             .OrderBy(filter)
-            .TakePage(filter)
+            .TakePage(filter.CurrentPage)
             .ToListAsync();
     }
     

@@ -47,7 +47,7 @@ public class BidStore
         return _storage.Bids
             .FilterBy(filter)
             .OrderBy(filter)
-            .TakePage(filter)
+            .TakePage(filter.PageIndex+1)
             .ToListAsync();
     }
     

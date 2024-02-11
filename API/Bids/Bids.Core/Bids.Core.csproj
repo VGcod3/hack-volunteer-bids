@@ -19,6 +19,7 @@
 
     <ItemGroup>
       <Compile Remove="Class1.cs" />
+      <Compile Remove="Filters\Auction\IAuctionFilter.cs" />
     </ItemGroup>
 
     <ItemGroup>

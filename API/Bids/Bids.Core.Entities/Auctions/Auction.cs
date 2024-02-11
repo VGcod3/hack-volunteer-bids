@@ -8,6 +8,8 @@ public class Auction
     public string Name { get; set; } = String.Empty;
     public string Description { get; set; } = String.Empty;
     public double StartPrice { get; set; }
+    public double HighestPrice { get; set; }
+    public Enum AuctionCategory { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime FinishDate { get; set; }
     public User CreatedBy { get; set; } = null!;

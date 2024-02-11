@@ -2,13 +2,12 @@ using Bids.Abstrations;
 
 namespace Bids.Core.Filters.Auction;
 
-public class AuctionFilter : IAuctionFilter
+public class AuctionFilter
 {
-    public int PageIndex { get; set; }
-    public int PageSize { get; set; } = 20;
-    public AuctionFieldIdentifier SortBy { get; set; } = AuctionFieldIdentifier.Date;
-    public DateTime? EndDate { get; set; }
-    public bool? Finished { get; set; }
-    public SortOrder SortOrder { get; set; } = SortOrder.Ascending;
-    public DateTime? StartDate { get; set; }
+    public CategoryOption[] Categories { get; set; } = Array.Empty<CategoryOption>();
+    public PriceFilter PriceFilter { get; set; } = null!;
+    public int CurrentPage { get; set; }
+    public int TotalPages { get; set; }
+    public string SearchField { get; set; } = String.Empty;
+    public SortOptionsEnum SortBy { get; set; } = SortOptionsEnum.CreatedAt;
 }

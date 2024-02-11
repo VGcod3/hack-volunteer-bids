@@ -1,5 +1,5 @@
 using Bids.Abstrations;
-using Bids.Core.Filters;
+using Bids.Core.Entities.Users;
 using Bids.Core.Filters.Auction;
 using Bids.Core.Filters.Bid;
 using Bids.Entities;
@@ -10,13 +10,29 @@ public class AuctionManager
 {
     private readonly AuctionStore _auctionStore;
     private readonly BidStore _bidStore;
+    private readonly UserStore _userStore;
     
-    public AuctionManager(AuctionStore auctionStore, BidStore bidStore)
+    public AuctionManager(AuctionStore auctionStore, BidStore bidStore, UserStore userStore)
     {
         _auctionStore = auctionStore;
         _bidStore = bidStore;
+        _userStore = userStore;
     }
 
+    public async Task<bool> AddAuction(AuctionDto auctionDto)
+    {
+        User? user = await _userStore.GetByEmail(auctionDto.PlacedBy);
+
+        if (user is null)
+            return false;
+
+        Auction auction = auctionDto.FromDto(user);
+
+        await AddAuction(auction);
+
+        return true;
+    }
+    
     public Task AddAuction(Auction auction)
     {
         return _auctionStore.Create(auction);
@@ -37,7 +53,7 @@ public class AuctionManager
         return _bidStore.Delete(bidId);
     }
 
-    public async Task<PagedList<Auction>> Find(IAuctionFilter filter)
+    public async Task<PagedList<Auction>> Find(AuctionFilter filter)
     {
         List<Auction> auctionsPage = await _auctionStore.Find(filter);
         int totalCount = await _auctionStore.CountTotal(filter);
@@ -49,21 +65,23 @@ public class AuctionManager
         };
     }
     
-    public async Task<PagedList<Bid>> Find(IBidFilter filter)
+    public async Task<List<Bid>> Find(IBidFilter filter)
     {
         List<Bid> bidsPage = await _bidStore.Find(filter);
-        int totalCount = await _bidStore.CountTotal(filter);
 
-        return new PagedList<Bid>()
-        {
-            Value = bidsPage,
-            Count = totalCount
-        };
+        return bidsPage;
     }
 
     public Task<Auction?> Get(long id)
     {
         return _auctionStore.Get(id);
+    }
+    
+    public async Task<AuctionDto?> GetDto(long id)
+    {
+        Auction? auction = await Get(id);
+
+        return auction?.ToDto();
     }
 
     public Task<Bid?> Get(Guid id)
@@ -74,6 +92,19 @@ public class AuctionManager
     public Task Update(Auction auction)
     {
         return _auctionStore.Update(auction);
+    }
+    
+    public async Task<bool> Update(AuctionDto auctionDto)
+    {
+        Auction? auction = await Get(auctionDto.Id);
+
+        if (auction is null)
+            return false;
+
+        auction.PopulateFromDto(auctionDto);
+
+        await Update(auction);
+        return true;
     }
 
     public Task Update(Bid bid)
