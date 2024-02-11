@@ -2,6 +2,7 @@ using Bids.Abstrations;
 using Bids.Core.Filters;
 using Bids.Core.Filters.Auction;
 using Bids.Entities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bids.Core;
@@ -14,7 +15,7 @@ public class AuctionStore
     {
         _storage = dbContext;
     }
-
+    
     public Task<int> CountTotal(AuctionFilter filter)
     {
         return _storage.Auctions
@@ -63,4 +64,7 @@ public class AuctionStore
 
         return _storage.SaveChangesAsync();
     }
+
+    public Task<List<Auction>> GetAll()
+        => _storage.Auctions.AsNoTracking().ToListAsync();
 }

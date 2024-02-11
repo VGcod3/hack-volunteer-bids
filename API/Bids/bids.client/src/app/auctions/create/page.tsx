@@ -23,16 +23,28 @@ export function InputWithLabel({ name, label, type = 'text', ...props }: InputWi
   );
 }
 
+export enum AuctionCategory {
+  Art,
+  Jewelry,
+  Collectibles,
+  Home,
+  Fashion,
+  Motors,
+  Electronics,
+  Toys,
+  Travel,
+  Other
+}
+
 interface Auction {
   name: string;
   description: string;
-  category: string;
+  category: AuctionCategory | null;
   startPrice: number;
   highestPrice: number;
   placedBy: string;
-  images: string[];
-  auctionStart: string;
-  auctionEnd: string;
+  StartDate: string;
+  FinishDate: string;
 }
 
 const AuctionLotPage: React.FC = () => {
@@ -45,18 +57,17 @@ const AuctionLotPage: React.FC = () => {
   const initiaValues: Auction = {
     name: '',
     description: '',
-    category: '',
     startPrice: 0,
+    category: null,
     highestPrice: 0,
     placedBy: '',
-    images: [],
-    auctionStart: '',
-    auctionEnd: '',
+    StartDate: '',
+    FinishDate: '',
   };
 
   const handleCreateAuction = () => {
     // Here, you can implement the logic to create a new auction using the auction state
-    console.log('Creating new auction:', auction);
+    // console.log('Creating new auction:', auction);
   };
 
   return (

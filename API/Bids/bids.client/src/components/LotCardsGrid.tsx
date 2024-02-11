@@ -30,7 +30,7 @@ export default function LotCardsGrid() {
       {lotsList.map((lot, index) => (
         <AnimatedWrapper delay={0.2} key={index}>
           <LotCard
-            imageUrl={lot.images[0]}
+            imageUrl={""}
             name={lot.name}
             highestPrice={lot.highestPrice}
             index={index}

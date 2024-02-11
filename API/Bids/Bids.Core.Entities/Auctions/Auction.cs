@@ -9,10 +9,13 @@ public class Auction
     public string Description { get; set; } = String.Empty;
     public double StartPrice { get; set; }
     public double HighestPrice { get; set; }
-    public Enum AuctionCategory { get; set; }
+    public AuctionCategory AuctionCategory { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime FinishDate { get; set; }
+
+    public string CreatedById { get; set; } = null!;
     public User CreatedBy { get; set; } = null!;
+    
     public bool Completed { get; set; } = false;
     public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedOn { get; set; } = DateTime.MinValue;

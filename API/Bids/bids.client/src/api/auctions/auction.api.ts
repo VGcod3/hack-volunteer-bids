@@ -9,6 +9,9 @@ import { LotType } from './LotType';
 const TAKE = 6;
 
 export function useGetLotsQuery(filter: FilterState, refetch: boolean = false) {
+  const basePath = "http://localhost:5293";
+  const baseAunctionPath = basePath  + "/api/Auctions";
+
   const [data, setData] = useState<LotType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -17,62 +20,14 @@ export function useGetLotsQuery(filter: FilterState, refetch: boolean = false) {
   const fetchData = useDebounce(async () => {
     setIsLoading(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      let filteredData = lotsdata;
-
-      // Apply filters
-      filteredData = filteredData.filter(
-        (lot) =>
-          lot.name.toLowerCase().includes(filter.searchValue.toLowerCase().trim()) ||
-          lot.description.toLowerCase().includes(filter.searchValue.toLowerCase().trim()) ||
-          lot.placedBy.toLowerCase().includes(filter.searchValue.toLowerCase().trim()) ||
-          lot.category.toLowerCase().includes(filter.searchValue.toLowerCase().trim()),
-      );
-
-      filteredData = filteredData.filter((lot) => lot.highestPrice <= filter.priceFilter.value[1]);
-
-      const selectedCategories = filter.categories
-        .filter((category) => category.checked)
-        .map((category) => category.label);
-
-      if (selectedCategories.length > 0) {
-        filteredData = filteredData.filter((lot) => selectedCategories.includes(lot.category));
-      }
-
-      // Apply sorting
-      if (filter.sortBy) {
-        filteredData = filteredData.sort((a, b) => {
-          if (filter.sortBy === 'Newest Arrivals') {
-            return new Date(b.auctionStart).getTime() - new Date(a.auctionStart).getTime();
-          }
-          if (filter.sortBy === 'Oldest Arrivals') {
-            return new Date(a.auctionStart).getTime() - new Date(b.auctionStart).getTime();
-          }
-          if (filter.sortBy === 'Price: Low to High') {
-            return a.highestPrice - b.highestPrice;
-          }
-          if (filter.sortBy === 'Price: High to Low') {
-            return b.highestPrice - a.highestPrice;
-          }
-          if (filter.sortBy === 'Time: Ending Soon') {
-            return new Date(a.auctionEnd).getTime() - new Date(b.auctionEnd).getTime();
-          }
-          if (filter.sortBy === 'Time: Ending Later') {
-            return new Date(b.auctionEnd).getTime() - new Date(a.auctionEnd).getTime();
-          }
-          return 0;
+      await fetch(baseAunctionPath)
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          setData(data);
         });
-      }
-
-      // Apply pagination
-      const startIndex = (filter.currentPage - 1) * TAKE;
-      const endIndex = startIndex + TAKE;
-      const paginatedData = filteredData.slice(startIndex, endIndex);
-
-      setData(paginatedData);
-      dispatch(setTotalPages(Math.ceil(filteredData.length / TAKE)));
-
+        
       setError(null);
     } catch (err) {
       setError('Error fetching lots');

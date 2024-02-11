@@ -3,6 +3,7 @@ using Bids.Core.Entities.Users;
 using Bids.Core.Filters.Auction;
 using Bids.Core.Filters.Bid;
 using Bids.Entities;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Bids.Core;
 
@@ -110,5 +111,10 @@ public class AuctionManager
     public Task Update(Bid bid)
     {
         return _bidStore.Update(bid);
+    }
+
+    public Task<List<Auction>> GetAll()
+    {
+        return _auctionStore.GetAll();
     }
 }

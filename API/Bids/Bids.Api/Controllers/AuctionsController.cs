@@ -17,14 +17,16 @@ public class AuctionsController : Controller
     }
     
     [HttpGet]
-    public IActionResult GetAllAuctions()
+    public async Task<IActionResult> GetAllAuctions()
     {
-        return Ok();
+        var auctions =  await _auctionManager.GetAll();
+        return Ok(auctions);
     }
     
     [HttpGet("{auctionId:long}")]
     public async Task<IActionResult> Get([FromRoute] long auctionId)
     {
+
         AuctionDto? auction = await _auctionManager.GetDto(auctionId);
         
         return Ok(auction);

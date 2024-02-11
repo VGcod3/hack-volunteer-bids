@@ -1,12 +1,13 @@
+import { AuctionCategory } from "@/app/auctions/create/page";
+
 export type LotType = {
   id: number;
   name: string;
   description: string;
-  category: string;
+  category: AuctionCategory | null;
   startPrice: number;
   highestPrice: number;
   placedBy: string;
-  images: string[];
-  auctionStart: string;
-  auctionEnd: string;
+  StartDate: string;
+  FinishDate: string;
 };
