@@ -29,6 +29,12 @@ public class ApplicationDbContext : IdentityDbContext<User>
                 NormalizedName = "User"
             }
         );
+
+        builder.Entity<Auction>()
+            .Property(p => p.AuctionCategory)
+            .HasConversion(
+                p => p.ToString(),
+                p => Enum.Parse<AuctionCategory>( p));
         
         base.OnModelCreating(builder);
     }
