@@ -54,7 +54,7 @@ public class BidStore
     public Task<Bid?> Get(Guid bidId)
     {
         return _storage.Bids
-            .FirstOrDefaultAsync(b => b.Id == bidId);
+            .FirstOrDefaultAsync(b => b.Id == bidId && !b.Deleted);
     }
     
     public Task Update(Bid bid)

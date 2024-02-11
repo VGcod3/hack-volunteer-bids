@@ -11,7 +11,8 @@ internal static class BidExtensions
         IBidFilter filter)
     {
         return bids.Where(b =>
-            b.Auction.Id == filter.AuctionId || filter.AuctionId == null);
+            (b.Auction.Id == filter.AuctionId || filter.AuctionId == null)
+            && !b.Deleted);
     }
     
     internal static IQueryable<Bid> OrderBy(this IQueryable<Bid> bids,

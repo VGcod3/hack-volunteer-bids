@@ -13,7 +13,8 @@ internal static class AuctionExtensions
         return auctions.Where(a =>
             (a.Completed == filter.Finished || filter.Finished == null)
             && (a.StartDate >= filter.StartDate || filter.StartDate == null)
-            && (a.StartDate <= filter.EndDate || filter.EndDate == null));
+            && (a.StartDate <= filter.EndDate || filter.EndDate == null)
+            && !a.Deleted);
     }
     
     internal static IQueryable<Auction> OrderBy(this IQueryable<Auction> auctions,

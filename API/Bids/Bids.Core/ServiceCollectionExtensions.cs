@@ -6,7 +6,6 @@ public static class ServiceCollectionExtensions
 {
     public static void AddCore(this IServiceCollection services)
     {
-        services.AddScoped<AuctionManager>();
         services.AddScoped<AuctionStore>();
         services.AddScoped<BidStore>();
 

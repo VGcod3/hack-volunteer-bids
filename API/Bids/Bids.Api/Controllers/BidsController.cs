@@ -9,38 +9,36 @@ namespace Bids.Api.Controllers;
 [Route("/api/auctions/{auctionId:long}/[controller]")]
 public class BidsController : ControllerBase
 {
-    
     [HttpGet]
-    public IActionResult GetAllBidsForAuction(long auctionId)
+    public IActionResult GetAllBidsForAuction([FromRoute] long auctionId)
     {
         return Ok();
     }
 
-    [HttpGet("{bidId:long}")]
-    public IActionResult GetBidById(long auctionId, long bidId)
+    [HttpGet("{bidId:guid}")]
+    public IActionResult GetBidById(long auctionId, Guid bidId)
     {
         return Ok();
     }
     
     [Authorize]
-    [HttpDelete("{bidId:long}")]
-    public IActionResult Delete([FromRoute] long auctionId, [FromRoute] long bidId)
+    [HttpDelete("{bidId:guid}")]
+    public IActionResult Delete([FromRoute] long auctionId, [FromRoute] Guid bidId)
     {
         return Ok();
     }
     
     [Authorize]
     [HttpPost]
-    public IActionResult Create(long auctionId, [FromBody] Bid auction)
+    public IActionResult Create(long auctionId, [FromBody] Bid bid)
     {
         return Ok();
     }
     
     [Authorize]
     [HttpPut]
-    public IActionResult Update([FromRoute] long auctionId, [FromBody] Auction auction)
+    public IActionResult Update([FromRoute] long auctionId, [FromBody] Bid bid)
     {
         return Ok();
     }
-
 }

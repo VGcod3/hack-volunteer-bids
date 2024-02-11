@@ -54,7 +54,7 @@ public class AuctionStore
     public Task<Auction?> Get(long auctionId)
     {
         return _storage.Auctions
-            .FirstOrDefaultAsync(a => a.Id == auctionId);
+            .FirstOrDefaultAsync(a => a.Id == auctionId && !a.Deleted);
     }
     
     public Task Update(Auction auction)
